@@ -45,7 +45,7 @@ src/
   binaria.c          TAREFA 2 Finalizado
   hash.c             TAREFA 3 Concluído
   arvoreb.c          TAREFA 4 Resolvido
-RELATORIO.md         preencher com os resultados e as respostas
+RELATORIO.md         TAREFA 5 Executado
 Makefile
 ```
 
