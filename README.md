@@ -2,7 +2,7 @@
 
 **Disciplina:** Estrutura de Dados II  
 **Conteúdo:** (pesquisa de dados e hashing) e (classificação e Árvore-B)  
-**Grupo:** Elas e Ele
+**Grupo:** ### alunos  (MAX 4 TIMES)  
 **Prazo:** 18/11/2026
 
 ## Integrantes
