@@ -57,7 +57,7 @@ int hash_busca(const Hash *h, int chave) {
     return -1; // Não encontrado
 }
 
-/* Retorna o tamanho da maior lista encadeada na tabela */
+/* Retorna o tamanho do maior lista encadeada na tabela */
 int hash_maior_lista(const Hash *h) {
     int maior = 0;
     for (int i = 0; i < h->m; i++) {
