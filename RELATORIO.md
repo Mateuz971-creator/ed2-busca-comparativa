@@ -48,6 +48,7 @@ Copiem os valores da coluna **Comparacoes/busca** (e dos Detalhes, quando pedido
    Para N = 100.000, o Quicksort realizou 2.228.115 comparações para ordenar o vetor. A busca sequencial realizou, em média, 75.401,71 comparações por busca, enquanto a busca binária realizou 16,19.
 Dividindo o custo da ordenação pela economia de comparações em cada busca, temos:
 2.228.115 / (75.401,71 - 16,19) ≈ 29,56
+
 Portanto, após aproximadamente 30 buscas, o custo inicial da ordenação é compensado pela economia de comparações proporcionada pela busca binária. Esse resultado é uma estimativa baseada no número de comparações, e não no tempo de execução.
 
 
@@ -55,29 +56,48 @@ Portanto, após aproximadamente 30 buscas, o custo inicial da ordenação é com
 
 | t | Máx. chaves por nó | Altura | Nós | Nós visitados por busca |
 | --- | --- | --- | --- | --- |
-| 2 |  |  |  |  |
-| 3 |  |  |  |  |
-| 10 |  |  |  |  |
-| 50 |  |  |  |  |
+| 2 |3|13|57124|  |
+| 3 |5|9|31298|  |
+| 10 |19|5|7666|  |
+| 50 |99|3|1482|  |
 
 **Perguntas**
 
 6. Por que a altura cai quando t aumenta?
+
+   A altura da Árvore-B diminui quando o grau mínimo aumenta porque cada nó pode armazenar mais chaves e possuir mais filhos. Assim, a mesma quantidade de registros pode ser organizada em menos níveis. Nos testes, a altura caiu de 13, com t = 2, para 3, com t = 50.
+
 7. Com t = 50, cada nó visitado pode exigir até 99 comparações dentro do nó. Mesmo assim, por que bancos de dados usam árvores com nós grandes? Pensem em cada nó como uma leitura de disco.
+
+   Os bancos de dados utilizam árvores com nós grandes porque o acesso ao disco é mais demorado do que as comparações feitas dentro de um nó. Mesmo que um nó tenha muitas chaves, a árvore fica com menos níveis, reduzindo a quantidade de leituras de disco necessárias para encontrar um registro. Por isso, árvores com nós maiores podem ser mais eficientes em bancos de dados.
 
 ## E4. Fator de carga da hash (N = 100.000)
 
 | alfa | m (listas) | Comparações por busca | Maior lista |
 | --- | --- | --- | --- |
-| 0,5 |  |  |  |
-| 1 |  |  |  |
-| 2 |  |  |  |
-| 5 |  |  |  |
+| 0,5 |200003|0.82|5|
+| 1 |100003|1.19|7|
+| 2 |50021|1.92|9|
+| 5 |20011|4.14|16|
 
 **Perguntas**
 
 8. A teoria diz que, no encadeamento, uma busca com sucesso faz em média cerca de 1 + alfa/2 comparações e uma busca sem sucesso faz cerca de alfa. Como metade das consultas existe, qual seria a média teórica para cada alfa? Comparem com o medido.
+
+   Considerando metade das buscas com sucesso e metade sem sucesso, a média teórica de comparações é 0,5 + 0,75 × alfa.
+   
+| Alfa (α) | Média teórica | Média medida |
+|---|---|---|
+| 0,5 | 0,875 | 0,82 |
+| 1 | 1,25 | 1,19 |
+| 2 | 2,00 | 1,92 |
+| 5 | 4,25 | 4,14 |
+
+  Os resultados ficaram próximos dos valores teóricos e mostram que, conforme o fator de carga aumenta, o número médio de comparações também aumenta.
+
 9. Por que é possível ter comparação por busca menor que 1?
+  
+   É possível ter menos de uma comparação por busca porque algumas matrículas pesquisadas não existem e podem cair em listas vazias da tabela hash. Nesses casos, o programa identifica que a matrícula não está cadastrada sem precisar comparar nenhuma chave. Isso reduz a média geral de comparações por busca.
 
 ## Conclusão
 
