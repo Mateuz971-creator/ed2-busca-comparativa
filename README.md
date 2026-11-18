@@ -41,10 +41,10 @@ src/
   medicao.c/.h       PRONTO  contador de comparações, tempo, primo_ge()
   sequencial.c/.h    PRONTO  busca sequencial (modelo de contagem)
   arvoreb_pronto.c   PRONTO  criação e liberação de nós da Árvore-B
-  ordenacao.c        TAREFA 1
-  binaria.c          TAREFA 2
-  hash.c             TAREFA 3
-  arvoreb.c          TAREFA 4 (e o desafio)
+  ordenacao.c        TAREFA 1 Feito
+  binaria.c          TAREFA 2 Finalizado
+  hash.c             TAREFA 3 Concluído
+  arvoreb.c          TAREFA 4 Resolvido
 RELATORIO.md         preencher com os resultados e as respostas
 Makefile
 ```
