@@ -27,8 +27,8 @@ Vocês vão implementar quatro formas de busca sobre **o mesmo cadastro** e medi
 | --- | --- |
 | Busca sequencial no vetor fora de ordem | **já pronta**, serve de modelo |
 | Ordenação (Inserção e Quicksort) + busca binária | **Feito**|
-| Tabela hash com encadeamento | vocês implementam |
-| Índice em Árvore-B | vocês implementam |
+| Tabela hash com encadeamento | **Concluído** |
+| Índice em Árvore-B | **Resolvido** |
 
 O programa principal (`main.c`) já gera os dados, roda todas as buscas, mede o tempo, conta as comparações e **confere se as respostas de cada estrutura batem com a busca sequencial**.
 
