@@ -10,16 +10,24 @@ Copiem os valores da coluna **Comparacoes/busca** (e dos Detalhes, quando pedido
 
 | N | Sequencial | Binária | Hash | Árvore-B |
 | --- | --- | --- | --- | --- |
-| 10.000 |  |  |  |  |
-| 50.000 |  |  |  |  |
-| 100.000 |  |  |  |  |
-| 200.000 |  |  |  |  |
+| 10.000 |7465.45|12.87|1.24|6.85|
+| 50.000 |37618.52|15.16|1.21|7.85|
+| 100.000 |75401.71|16.19|1.19|8.84|
+| 200.000 |150176.39|17.18|1.13|8.84|
 
 **Perguntas**
 
 1. Na busca sequencial, quantas comparações são feitas quando a matrícula existe? E quando não existe? Usem isso para explicar por que a média fica perto de 0,75 × N.
+
+   Na busca sequencial, quando a matrícula existe, são feitas em média aproximadamente N/2 comparações, pois o aluno pode estar em qualquer posição. Quando não existe, é necessário percorrer os N elementos. Como metade das consultas existe e metade não existe, a média fica próxima de 0,75 × N.
+
 2. Calculem log₂ N para cada N e comparem com a coluna da binária. O que acontece com as comparações quando N dobra?
+
+   Os valores aproximados de log₂ N são 13,29 para 10.000; 15,61 para 50.000; 16,61 para 100.000; e 17,61 para 200.000. Os valores medidos na busca binária ficaram próximos desses números. Quando N dobra, o número de comparações aumenta aproximadamente uma unidade, mostrando crescimento logarítmico.
+
 3. Qual estrutura quase não muda quando N cresce? Por quê?
+
+   A tabela hash foi a estrutura que apresentou menor variação no número de comparações, ficando entre 1,13 e 1,24. Isso acontece porque a função hash permite acessar diretamente uma lista associada à matrícula, mantendo o número médio de comparações próximo de uma constante quando o fator de carga é controlado.
 
 ## E2. Ordenação
 
