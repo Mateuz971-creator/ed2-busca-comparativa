@@ -2,7 +2,7 @@
 #include "binaria.h"
 #include "medicao.h"
 
-/* ===================== TAREFA 2: BUSCA BINÁRIA ===================== */
+/* ===================== TAREFA 2: Busca Binária - implementação ===================== */
 
 int busca_binaria(const Aluno *v, int n, int mat) {
 
