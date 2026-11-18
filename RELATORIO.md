@@ -103,13 +103,24 @@ Portanto, após aproximadamente 30 buscas, o custo inicial da ordenação é com
 
 10. Qual estrutura vocês escolheriam em cada situação? Justifiquem.
     1. Sistema que só busca alunos pela matrícula, com o cadastro inteiro na memória.
+    
+    Escolheríamos a tabela hash, pois ela apresentou o menor número médio de comparações nos experimentos. Como os dados estão na memória e as buscas são feitas diretamente pela matrícula, a hash oferece um acesso rápido, sem precisar manter os registros ordenados.
+
     2. Relatório que lista os alunos em ordem de matrícula ou por faixa (ex.: todos os ingressantes de 2024).
+    
+    Escolheríamos a Árvore-B, pois ela mantém as chaves organizadas e facilita buscas por intervalos e a listagem ordenada dos registros. Para consultar ingressantes de 2024, seria necessário ter um índice pelo ano de ingresso.
+
     3. Índice de um banco de dados guardado em disco, com milhões de registros.
+
+    Escolheríamos a Árvore-B, pois ela armazena várias chaves em cada nó, reduzindo a altura da árvore e a quantidade de acessos ao disco. Isso torna a busca mais eficiente em bases de dados muito grandes.
 
 ## Divisão do trabalho
 
 | Integrante | O que fez |
 | --- | --- |
-|  |  |
-|  |  |
-|  |  |
+|Mateus Batista|Ordenação, busca binária e análise dos resultados.|
+|Raika Maciel|Implementação da tabela hash.|
+|Raica da Silva|Implementação da Árvore-B e desafio bônus.|
+|Victoria Batalha|Organização do relatório, respostas e conclusões.|
+
+
