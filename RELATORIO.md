@@ -4,7 +4,6 @@ Grupo: Elas e Ele
 
 Integrantes: Mateus Batista, Raika Maciel, Raica da Silva, Victoria Batalha.
 
-Copiem os valores da coluna **Comparacoes/busca** (e dos Detalhes, quando pedido). Os tempos são opcionais, porque variam de um computador para outro.
 
 ## E1. Crescimento de N (t = 3, alfa = 1)
 
@@ -49,7 +48,7 @@ Copiem os valores da coluna **Comparacoes/busca** (e dos Detalhes, quando pedido
 Dividindo o custo da ordenação pela economia de comparações em cada busca, temos:
 2.228.115 / (75.401,71 - 16,19) ≈ 29,56
 
-Portanto, após aproximadamente 30 buscas, o custo inicial da ordenação é compensado pela economia de comparações proporcionada pela busca binária. Esse resultado é uma estimativa baseada no número de comparações, e não no tempo de execução.
+   Portanto, após aproximadamente 30 buscas, o custo inicial da ordenação é compensado pela economia de comparações proporcionada pela busca binária. Esse resultado é uma estimativa baseada no número de comparações, e não no tempo de execução.
 
 
 ## E3. Grau da Árvore-B (N = 100.000)
