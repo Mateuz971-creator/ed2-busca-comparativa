@@ -1,6 +1,7 @@
 # Relatório: Comparativo de Estruturas de Busca
 
-Grupo: __________________________________________
+Grupo: Elas e Ele
+Integrantes: Mateus Batista, Raika Maciel, Raica da Silva, Victoria Batalha.
 
 Copiem os valores da coluna **Comparacoes/busca** (e dos Detalhes, quando pedido). Os tempos são opcionais, porque variam de um computador para outro.
 
