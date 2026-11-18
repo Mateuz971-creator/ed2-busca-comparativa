@@ -2,66 +2,174 @@
 #include "arvoreb.h"
 #include "medicao.h"
 
-/* ===================== TAREFA 4: ÁRVORE-B =====================
-   Mesmo algoritmo do laboratório (CLRS), agora com o grau mínimo t
-   guardado em a->t. Cada nó tem até 2t-1 chaves e 2t filhos.
-   Junto de cada chave, guarde também pos (a posição do aluno no vetor).
-   Para criar nós, use arvb_novo_no(a, folha), que já está pronta. */
-
+// ========== 1. BUSCA ==========
 int arvb_busca(const ArvoreB *a, int chave) {
-    /* TODO: a partir de a->raiz, faça comparacoes++ a cada NÓ visitado;
-       ache a primeira posição i com chave <= x->chave[i];
-       se for igual, devolva x->pos[i]; se o nó for folha, devolva -1;
-       senão, desça para x->filho[i]. */
-    (void)a; (void)chave;
-    return -1;
+    if (a->raiz == NULL)
+        return -1;
+    
+    NoB *x = a->raiz;
+    while (1) {
+        comparacoes++;  // Conta cada NÓ visitado
+        
+        int i = 0;
+        while (i < x->n && chave > x->chave[i])
+            i++;
+        
+        if (i < x->n && chave == x->chave[i])
+            return x->pos[i];
+        
+        if (x->folha)
+            return -1;
+        
+        x = x->filho[i];
+    }
 }
 
+// ========== 2. DIVIDE FILHO ==========
 static void divide_filho(ArvoreB *a, NoB *x, int i) {
-    /* TODO: y = x->filho[i] está cheio (2t-1 chaves).
-       1. z = arvb_novo_no(a, y->folha).
-       2. Copie as t-1 maiores chaves (e pos) de y para z;
-          se y não for folha, copie também os t últimos filhos.
-       3. y->n = t-1 e z->n = t-1.
-       4. Em x, abra espaço: filhos a partir de i+1 e chaves a partir de i.
-       5. x->filho[i+1] = z; suba y->chave[t-1] (e y->pos[t-1]) para a
-          posição i de x; x->n++. */
-    (void)a; (void)x; (void)i;
+    int t = a->t;
+    NoB *y = x->filho[i];
+    NoB *z = arvb_novo_no(a, y->folha);
+    z->n = t - 1;
+    
+    // Copia as t-1 maiores chaves e posições de y para z
+    for (int j = 0; j < t - 1; j++) {
+        z->chave[j] = y->chave[j + t];
+        z->pos[j] = y->pos[j + t];
+    }
+    
+    // Copia os t últimos filhos, se não for folha
+    if (!y->folha) {
+        for (int j = 0; j < t; j++)
+            z->filho[j] = y->filho[j + t];
+    }
+    
+    y->n = t - 1;
+    
+    // Abre espaço nos filhos de x
+    for (int j = x->n; j >= i + 1; j--)
+        x->filho[j + 1] = x->filho[j];
+    
+    x->filho[i + 1] = z;
+    
+    // Abre espaço nas chaves e posições de x
+    for (int j = x->n - 1; j >= i; j--) {
+        x->chave[j + 1] = x->chave[j];
+        x->pos[j + 1] = x->pos[j];
+    }
+    
+    // Sobe a chave do meio e sua posição
+    x->chave[i] = y->chave[t - 1];
+    x->pos[i] = y->pos[t - 1];
+    x->n++;
 }
 
+// ========== 3. INSERE EM NÓ NÃO CHEIO ==========
 static void insere_nao_cheio(ArvoreB *a, NoB *x, int k, int v) {
-    /* TODO:
-       - Folha: desloque para a direita as chaves maiores que k e coloque
-         k (e v) na posição livre; x->n++.
-       - Interno: ache o filho i onde k deve descer; se ele estiver cheio,
-         divida-o (divide_filho) e decida entre i e i+1; desça. */
-    (void)a; (void)x; (void)k; (void)v;
-    (void)divide_filho;
+    int i = x->n - 1;
+    
+    if (x->folha) {
+        // Desloca chaves maiores para a direita
+        while (i >= 0 && k < x->chave[i]) {
+            x->chave[i + 1] = x->chave[i];
+            x->pos[i + 1] = x->pos[i];
+            i--;
+        }
+        x->chave[i + 1] = k;
+        x->pos[i + 1] = v;
+        x->n++;
+    } else {
+        // Acha a posição certa para descer
+        while (i >= 0 && k < x->chave[i])
+            i--;
+        i++;
+        
+        // Se o filho está cheio, divide primeiro
+        if (x->filho[i]->n == 2 * a->t - 1) {
+            divide_filho(a, x, i);
+            if (k > x->chave[i])
+                i++;
+        }
+        insere_nao_cheio(a, x->filho[i], k, v);
+    }
 }
 
+// ========== 4. INSERE ==========
 void arvb_insere(ArvoreB *a, int chave, int pos) {
-    /* TODO:
-       - Se a chave já existir (arvb_busca diferente de -1), não insira.
-       - Árvore vazia: crie a raiz folha com essa única chave.
-       - Raiz cheia: crie uma nova raiz s (não folha), s->filho[0] = raiz
-         antiga, a->raiz = s, divida o filho 0.
-       - Por fim, chame insere_nao_cheio(a, a->raiz, chave, pos). */
-    (void)a; (void)chave; (void)pos;
-    (void)insere_nao_cheio;
+    // Não insere se a chave já existir
+    if (arvb_busca(a, chave) != -1)
+        return;
+    
+    // Árvore vazia
+    if (a->raiz == NULL) {
+        a->raiz = arvb_novo_no(a, 1);
+        a->raiz->chave[0] = chave;
+        a->raiz->pos[0] = pos;
+        a->raiz->n = 1;
+        return;
+    }
+    
+    // Raiz está cheia → árvore cresce em altura
+    if (a->raiz->n == 2 * a->t - 1) {
+        NoB *s = arvb_novo_no(a, 0);
+        s->filho[0] = a->raiz;
+        a->raiz = s;
+        divide_filho(a, s, 0);
+        insere_nao_cheio(a, s, chave, pos);
+    } else {
+        insere_nao_cheio(a, a->raiz, chave, pos);
+    }
 }
 
+// ========== 5. ALTURA ==========
 int arvb_altura(const ArvoreB *a) {
-    /* TODO: conte os níveis descendo sempre por filho[0] até uma folha.
-       Árvore vazia: 0. */
-    (void)a;
-    return 0;
+    if (a->raiz == NULL)
+        return 0;
+    
+    int altura = 1;
+    NoB *x = a->raiz;
+    while (!x->folha) {
+        altura++;
+        x = x->filho[0];
+    }
+    return altura;
 }
 
-/* ===================== DESAFIO (BÔNUS) =====================
-   Conte quantas chaves estão no intervalo [ini, fim] SEM visitar a árvore
-   inteira: só desça nas subárvores que podem ter chaves do intervalo.
-   O programa usa isso para contar os ingressantes de 2024. */
+// ========== 6. DESAFIO: CONTA FAIXA ==========
+static int conta_no_intervalo(const NoB *x, int ini, int fim) {
+    int total = 0;
+    int i = 0;
+    
+    // Conta as chaves neste nó que estão no intervalo
+    while (i < x->n && x->chave[i] <= fim) {
+        if (x->chave[i] >= ini)
+            total++;
+        i++;
+    }
+    
+    // Se for folha, acabou
+    if (x->folha)
+        return total;
+    
+    // Encontra o primeiro filho que pode ter valores no intervalo
+    int inicio = 0;
+    while (inicio < x->n && ini > x->chave[inicio])
+        inicio++;
+    
+    // Encontra o último filho que pode ter valores no intervalo
+    int fim_idx = x->n;
+    while (fim_idx > 0 && fim < x->chave[fim_idx - 1])
+        fim_idx--;
+    
+    // Desce apenas nos filhos necessários
+    for (int j = inicio; j <= fim_idx; j++)
+        total += conta_no_intervalo(x->filho[j], ini, fim);
+    
+    return total;
+}
+
 int arvb_conta_faixa(const ArvoreB *a, int ini, int fim) {
-    (void)a; (void)ini; (void)fim;
-    return -1;
+    if (a->raiz == NULL)
+        return 0;
+    return conta_no_intervalo(a->raiz, ini, fim);
 }
