@@ -26,7 +26,7 @@ Vocês vão implementar quatro formas de busca sobre **o mesmo cadastro** e medi
 | Estrutura | Situação |
 | --- | --- |
 | Busca sequencial no vetor fora de ordem | **já pronta**, serve de modelo |
-| Ordenação (Inserção e Quicksort) + busca binária | vocês implementam |
+| Ordenação (Inserção e Quicksort) + busca binária | **Feito**|
 | Tabela hash com encadeamento | vocês implementam |
 | Índice em Árvore-B | vocês implementam |
 
