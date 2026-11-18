@@ -33,14 +33,23 @@ Copiem os valores da coluna **Comparacoes/busca** (e dos Detalhes, quando pedido
 
 | Algoritmo | N | Comparações | Tempo (s) |
 | --- | --- | --- | --- |
-| Inserção | 10.000 |  |  |
-| Quicksort | 10.000 |  |  |
-| Quicksort | 100.000 |  |  |
+| Inserção | 10.000 |25257925|0.1350|
+| Quicksort | 10.000 |179055|0.0020|
+| Quicksort | 100.000 |2228115|0.0200|
 
 **Perguntas**
 
 4. Quantas vezes a Inserção fez mais comparações que o Quicksort com N = 10.000? Relacionem com as complexidades O(n²) e O(n log n).
+
+   Com N = 10.000, a ordenação por Inserção realizou aproximadamente 141 vezes mais comparações que o Quicksort. Isso ocorre porque a Inserção apresenta complexidade O(n²) no caso médio, enquanto o Quicksort apresenta complexidade média O(n log n), sendo mais eficiente para grandes quantidades de dados.
+
 5. Para usar a busca binária é preciso ordenar antes. Com N = 100.000, depois de quantas buscas o custo do Quicksort "se paga", comparado a fazer só buscas sequenciais? Mostrem a conta.
+
+   Para N = 100.000, o Quicksort realizou 2.228.115 comparações para ordenar o vetor. A busca sequencial realizou, em média, 75.401,71 comparações por busca, enquanto a busca binária realizou 16,19.
+Dividindo o custo da ordenação pela economia de comparações em cada busca, temos:
+2.228.115 / (75.401,71 - 16,19) ≈ 29,56
+Portanto, após aproximadamente 30 buscas, o custo inicial da ordenação é compensado pela economia de comparações proporcionada pela busca binária. Esse resultado é uma estimativa baseada no número de comparações, e não no tempo de execução.
+
 
 ## E3. Grau da Árvore-B (N = 100.000)
 
