@@ -55,10 +55,10 @@ Dividindo o custo da ordenação pela economia de comparações em cada busca, t
 
 | t | Máx. chaves por nó | Altura | Nós | Nós visitados por busca |
 | --- | --- | --- | --- | --- |
-| 2 |3|13|57124|  |
-| 3 |5|9|31298|  |
-| 10 |19|5|7666|  |
-| 50 |99|3|1482|  |
+| 2 |3|13|57124|12,73|
+| 3 |5|9|31298|8,84|
+| 10 |19|5|7666|4.96|
+| 50 |99|3|1482|2.99|
 
 **Perguntas**
 
