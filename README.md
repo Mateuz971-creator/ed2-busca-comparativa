@@ -15,7 +15,7 @@
 | Raika Maciel | raikamdias-lgtm |
 | Raica Silva | K9s45vhk5p-hub |
 | Victória Batalha | vivibatalha |
-|  |  |
+| Rick Mota | rickzxtrash |
 
 ## O problema
 
